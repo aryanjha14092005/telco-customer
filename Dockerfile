@@ -25,7 +25,6 @@ RUN groupadd -r appuser && useradd -r -g appuser -d /app appuser
 # Copy application and model artifacts
 COPY app/ ./app/
 COPY model/ ./model/
-COPY pytest.ini .
 
 # Set correct ownership for application directory
 RUN chown -R appuser:appuser /app
