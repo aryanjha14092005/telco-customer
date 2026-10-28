@@ -1,0 +1,88 @@
+{
+  "model_name": "Telco Customer Churn Prediction Model",
+  "model_version": "1.0.0",
+  "framework": "scikit-learn",
+  "scikit_learn_version": "1.6.1",
+  "estimator_type": "sklearn.pipeline.Pipeline",
+  "pipeline_steps": [
+    {
+      "name": "preprocessor",
+      "type": "ColumnTransformer",
+      "numeric_transformers": [
+        {"name": "imputer", "type": "SimpleImputer", "strategy": "median"},
+        {"name": "scaler", "type": "StandardScaler"}
+      ],
+      "numeric_features": [
+        "SeniorCitizen",
+        "tenure",
+        "MonthlyCharges",
+        "TotalCharges"
+      ],
+      "categorical_transformers": [
+        {"name": "imputer", "type": "SimpleImputer", "strategy": "most_frequent"},
+        {"name": "encoder", "type": "OneHotEncoder", "handle_unknown": "ignore"}
+      ],
+      "categorical_features": [
+        "gender",
+        "Partner",
+        "Dependents",
+        "PhoneService",
+        "MultipleLines",
+        "InternetService",
+        "OnlineSecurity",
+        "OnlineBackup",
+        "DeviceProtection",
+        "TechSupport",
+        "StreamingTV",
+        "StreamingMovies",
+        "Contract",
+        "PaperlessBilling",
+        "PaymentMethod"
+      ]
+    },
+    {
+      "name": "classifier",
+      "type": "LogisticRegression",
+      "hyperparameters": {
+        "class_weight": "balanced",
+        "max_iter": 2000,
+        "random_state": 42
+      }
+    }
+  ],
+  "feature_names": [
+    "gender",
+    "SeniorCitizen",
+    "Partner",
+    "Dependents",
+    "tenure",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod",
+    "MonthlyCharges",
+    "TotalCharges"
+  ],
+  "n_features": 19,
+  "excluded_features": [
+    "customerID"
+  ],
+  "target": "Churn",
+  "classes": [0, 1],
+  "label_mapping": {
+    "0": "No",
+    "1": "Yes"
+  },
+  "supports_predict_proba": true,
+  "dataset_source": "https://www.kaggle.com/datasets/blastchar/telco-customer-churn",
+  "training_platform": "Google Colab",
+  "notes": "Trained using Google Colab with scikit-learn 1.6.1. Pipeline includes median imputation & scaling for numeric columns and most_frequent imputation & one-hot encoding for categorical columns."
+}
